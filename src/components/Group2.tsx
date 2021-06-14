@@ -25,7 +25,7 @@ const Group2: React.FC<{index: number, onSetValues: (values: Group2Value) => voi
     <FormControl component="fieldset">
       <FormLabel component="legend">Group 2 - Index: {index}</FormLabel>
       <Autocomplete
-        id="input1"
+        id={`group2_input1_${index}`}
         value={input1}
         options={arr1}
         renderInput={(params) => <TextField {...params} label="Input 1" variant="outlined"/>}
@@ -35,7 +35,7 @@ const Group2: React.FC<{index: number, onSetValues: (values: Group2Value) => voi
         }}
       />
       {input1 && <Autocomplete
-        id="input2"
+        id={`group2_input2_${index}`}
         value={input2}
         options={arr2}
         renderInput={(params) => <TextField {...params} label="Input 2" variant="outlined"/>}
@@ -45,7 +45,7 @@ const Group2: React.FC<{index: number, onSetValues: (values: Group2Value) => voi
         }}
       />}
       {input2 && <Autocomplete
-        id="input3"
+        id={`group2_input3_${index}`}
         value={input3}
         options={arr3}
         renderInput={(params) => <TextField {...params} label="Input 3" variant="outlined"/>}
