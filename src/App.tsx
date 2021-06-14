@@ -1,44 +1,37 @@
+import { Grid } from '@material-ui/core';
 import React from 'react';
 import './App.css';
-import {Autocomplete} from "@material-ui/lab";
-import {TextField} from "@material-ui/core";
-
-const arr1 = ['item 1', 'item 2', 'item 3'];
-const arr2 = ['item 1', 'item 2', 'item 3'];
-const arr3 = ['item 1', 'item 2', 'item 3'];
+import { Group1 } from "./components/Group1";
+import {Group2, Group2Value} from './components/Group2';
+import { Group3 } from './components/Group3';
 
 function App() {
-  const [input1, setInput1] = React.useState<string | null>(null);
-  const [input2, setInput2] = React.useState<string | null>(null);
-  const [input3] = React.useState<string | null>(null);
+  const [group1Value, setGroup1Value] = React.useState<number>(1);
+  const [group2Values, setGroup2Values] = React.useState<Group2Value[]>([]);
+
 
   return (
     <div className="App">
-      <Autocomplete
-        id="input1"
-        value={input1}
-        options={arr1}
-        renderInput={(params) => <TextField {...params} label="Input 1" variant="outlined"/>}
-        onChange={(e, v) => setInput1(v)}
-      />
-      {input1 && <Autocomplete
-        id="input2"
-        value={input2}
-        options={arr2}
-        renderInput={(params) => <TextField {...params} label="Input 2" variant="outlined"/>}
-        onChange={(e, v) => setInput2(v)}
-      />}
-      {input2 && <Autocomplete
-        id="input3"
-        value={input3}
-        options={arr3}
-        renderInput={(params) => <TextField {...params} label="Input 3" variant="outlined"/>}
-        onChange={(e, v) => {
-          setInput1(null);
-          setInput2(null);
-        }
-        }
-      />}
+      <Grid container direction="column" alignContent="flex-start">
+        <Group1 value={group1Value} setValue={setGroup1Value} />
+        {[...Array(group1Value)].map((v, index) => {
+          return <Group2
+            key={`group2_${index}`}
+            index={index}
+            onSetValues={(values) => {
+              const newValues = [...group2Values];
+              newValues[index] = values;
+
+              setGroup2Values(newValues);
+            }}
+          />;
+        })}
+        <Group3 onButtonPress={() => {
+          const trimmedValues = [...group2Values];
+          trimmedValues.splice(group1Value);
+          console.log(trimmedValues);
+        }} />
+      </Grid>
     </div>
   );
 }
