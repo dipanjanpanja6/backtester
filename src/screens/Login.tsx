@@ -2,10 +2,15 @@ import React from "react";
 import * as firebaseui from "firebaseui";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebaseui/dist/firebaseui.css"
 
 const Login: React.FC = () => {
   React.useEffect(() => {
-    const authUI = new firebaseui.auth.AuthUI(firebase.auth());
+    const auth = firebase.auth();
+    if (process.env.NODE_ENV === "development") {
+      auth.useEmulator(process.env.REACT_APP_AUTH_EMULATOR_URL as string)
+    }
+    const authUI = new firebaseui.auth.AuthUI(auth);
     const uiConfig = ({
       signInOptions: [
         {

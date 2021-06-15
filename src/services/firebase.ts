@@ -1,7 +1,8 @@
 import firebase from "firebase/app";
 
-const firebaseConfig = {
-  // please create a web app on Firebase Console to get the configuration (https://console.firebase.google.com)
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const config = process.env.REACT_APP_FIREBASE_CONFIG as string;
+const firebaseConfig = JSON.parse(config)
+if (!firebase.apps.length){
+    firebase.initializeApp(firebaseConfig);
+}
+
