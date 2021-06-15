@@ -1,40 +1,25 @@
-import { Grid } from '@material-ui/core';
-import React, {useCallback} from 'react';
+import React from 'react';
 import './App.css';
-import { Group1 } from "./components/Group1";
-import {Group2, Group2Value} from './components/Group2';
-import { Group3 } from './components/Group3';
+import "./services/firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { Main } from './screens/Main';
+import { Login } from './screens/Login';
 
 function App() {
-  const [group1Value, setGroup1Value] = React.useState<number>(1);
-  const [group2Values, setGroup2Values] = React.useState<Group2Value[]>([]);
+  const [user, setUser] = React.useState<null | firebase.User>(null);
 
-  const changeValues = useCallback((values,index)=>{
-    const newValues = [...group2Values];
-    newValues[index] = values;
+  React.useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  });
 
-    setGroup2Values(newValues);
-  },[group2Values]);
+  if (user) {
+    return <Main />;
+  }
 
-  return (
-    <div className="App">
-      <Grid container direction="column" alignContent="flex-start">
-        <Group1 value={group1Value} setValue={setGroup1Value} />
-        {[...Array(group1Value)].map((v, index) => {
-          return <Group2
-            key={`group2_${index}`}
-            index={index}
-            onSetValues={(values) => changeValues(values,index)}
-          />;
-        })}
-        <Group3 onButtonPress={() => {
-          const trimmedValues = [...group2Values];
-          trimmedValues.splice(group1Value);
-          console.log(trimmedValues);
-        }} />
-      </Grid>
-    </div>
-  );
+  return <Login />;
 }
 
 export default App;
