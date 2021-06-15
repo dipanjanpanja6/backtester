@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import { Group1 } from "./components/Group1";
 import {Group2, Group2Value} from './components/Group2';
@@ -9,6 +9,12 @@ function App() {
   const [group1Value, setGroup1Value] = React.useState<number>(1);
   const [group2Values, setGroup2Values] = React.useState<Group2Value[]>([]);
 
+  const changeValues = useCallback((values,index)=>{
+    const newValues = [...group2Values];
+    newValues[index] = values;
+
+    setGroup2Values(newValues);
+  },[group2Values]);
 
   return (
     <div className="App">
@@ -18,12 +24,7 @@ function App() {
           return <Group2
             key={`group2_${index}`}
             index={index}
-            onSetValues={(values) => {
-              const newValues = [...group2Values];
-              newValues[index] = values;
-
-              setGroup2Values(newValues);
-            }}
+            onSetValues={(values) => changeValues(values,index)}
           />;
         })}
         <Group3 onButtonPress={() => {

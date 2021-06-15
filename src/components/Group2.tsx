@@ -1,4 +1,4 @@
-import React from "react";
+import React, {} from "react";
 import {FormControl, FormLabel, TextField} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
 
@@ -17,9 +17,6 @@ const Group2: React.FC<{index: number, onSetValues: (values: Group2Value) => voi
   const [input2, setInput2] = React.useState<string | null>(null);
   const [input3, setInput3] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    onSetValues({input1, input2, input3});
-  }, [input1, input2, input3]);
 
   return (
     <FormControl component="fieldset">
