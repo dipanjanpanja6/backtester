@@ -1,6 +1,6 @@
 {
   "name": "backtester",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -27,7 +27,9 @@
     "build:fb": "copyfiles -f .html/fb/index.html public && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "setup": "node .scripts/create_env_file.js"
+    "setup": "node .scripts/create_env_file.js",
+    "commit": "cz",
+    "commit:lint": "commitlint -f e04f939971ac809b3229e812a92cc6b300f9ec4b"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +48,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
