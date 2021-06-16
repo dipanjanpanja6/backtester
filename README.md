@@ -5,6 +5,8 @@ Firebase account
 
 Install `npm i`
 
+Install Firebase tools `npm i -g firebase-tools`
+
 Initialise Firebase - `firebase init`
 
 Create app env - `npm run setup`
