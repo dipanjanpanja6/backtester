@@ -25,9 +25,8 @@ function App() {
         ssl: false,
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       setUser(user)
