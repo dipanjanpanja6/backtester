@@ -16,17 +16,19 @@ function ListPage() {
       .then(() => {
         fetchItem()
       })
-      .catch(error => {})
+      .catch(error => {
+        console.log(error)
+      })
   }
   const fetchItem = async () => {
     try {
-      var data: Array<Object> = []
+      let data: Array<Object> = []
 
       const res = await storageRef.listAll()
       if (res.items.length <= 0) {
         setState(null)
       } else {
-        var promise = res.items.map(
+        let promise = res.items.map(
           itemRef =>
             new Promise(resolve => {
               itemRef.getDownloadURL().then(url => {

@@ -2,8 +2,6 @@ import React, { useEffect } from "react"
 import "./App.css"
 import "./services/firebase"
 import firebase from "firebase/app"
-import "firebase/auth"
-import "firebase/storage"
 import { Main } from "./screens/Main"
 import { Login } from "./screens/Login"
 import { Grid } from "@material-ui/core"
@@ -18,11 +16,7 @@ function App() {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
-  useEffect(() => {
-    if (process.env.NODE_ENV === "development") {
-      firebase.storage().useEmulator("localhost", 9199)
-    }
-  }, [])
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {

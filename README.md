@@ -1,8 +1,24 @@
+### Required
+Firebase account
 
-`npm install -g firebase-tools` for firebase emulators
+### How to run
 
-`npm run setup` to create .env file
+Install `npm i`
 
-Add firebase config to .env file
+Initialise Firebase - `firebase init`
 
-`/functions` `npm run emulators` to run firebase locally
+Create app env - `npm run setup`
+
+Copy Firebase config to .env
+
+Run Firebase emulators - `cd functions && npm run emulators`
+
+Start app - `npm start`
+
+### Before you commit
+
+Build locally to confirm no warnings - `npm run build`
+
+Commit using conventional commits - `npm run commit`
+
+

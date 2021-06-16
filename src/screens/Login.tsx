@@ -6,11 +6,8 @@ import "firebaseui/dist/firebaseui.css"
 
 const Login: React.FC = () => {
   React.useEffect(() => {
-    const auth = firebase.auth();
-    if (process.env.NODE_ENV === "development") {
-      auth.useEmulator(process.env.REACT_APP_AUTH_EMULATOR_URL as string)
-    }
-    const authUI = new firebaseui.auth.AuthUI(auth);
+
+    const authUI = new firebaseui.auth.AuthUI(firebase.apps[0].auth());
     const uiConfig = ({
       signInOptions: [
         {
@@ -22,7 +19,7 @@ const Login: React.FC = () => {
       ]
     });
     authUI.start("#firebaseui-auth-container", uiConfig)
-  });
+  },[]);
 
   return (
     <div id="firebaseui-auth-container" />
