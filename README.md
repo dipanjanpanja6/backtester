@@ -6,5 +6,3 @@
 Add firebase config to .env file
 
 `/functions` `npm run emulators` to run firebase locally
-
-Add collection("list") in firestore with {"title":""}

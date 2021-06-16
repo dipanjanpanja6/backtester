@@ -3,7 +3,7 @@ import "./App.css"
 import "./services/firebase"
 import firebase from "firebase/app"
 import "firebase/auth"
-import "firebase/firestore"
+import "firebase/storage"
 import { Main } from "./screens/Main"
 import { Login } from "./screens/Login"
 import { Grid } from "@material-ui/core"
@@ -20,10 +20,7 @@ function App() {
   }
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
-      firebase.firestore().settings({
-        host: "localhost:8080",
-        ssl: false,
-      })
+      firebase.storage().useEmulator("localhost", 9199)
     }
   }, [])
 
