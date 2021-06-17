@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "setup": "node .scripts/create_env_file.js",
     "commit": "cz",
-    "commit:lint": "commitlint -f e04f939971ac809b3229e812a92cc6b300f9ec4b"
+    "commit:lint": "echo \"foo: bar\" | commitlint"
   },
   "eslintConfig": {
     "extends": [
@@ -55,8 +55,8 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cli": "^13.0.0",
+    "@commitlint/config-conventional": "^13.0.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0"
   },
