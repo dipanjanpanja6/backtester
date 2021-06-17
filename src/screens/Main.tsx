@@ -46,9 +46,19 @@ const Main: React.FC = () => {
   }, [calling, uploadFCF])
 
   useEffect(() => {
-    const interval = setInterval(function () {
+    let now = new Date()
+    let min = now.getMinutes()
+    let startIn = 10 - (min % 10)
+    let interval: ReturnType<typeof setTimeout>
+    const timeout = setTimeout(runInterval, startIn * 60 * 1000)
+
+    function runInterval() {
+      clearTimeout(timeout)
       setCalling(true)
-    }, 600000)
+      interval = setInterval(function () {
+        setCalling(true)
+      }, 600000)
+    }
 
     return () => {
       clearInterval(interval)
