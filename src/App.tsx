@@ -1,7 +1,5 @@
-import React, { useEffect } from "react"
+import React from "react"
 import "./App.css"
-import "./services/firebase"
-import firebase from "firebase/app"
 import { Main } from "./screens/Main"
 import { Login } from "./screens/Login"
 import { Grid } from "@material-ui/core"
@@ -10,19 +8,13 @@ import Appbar from "../src/components/AppBar"
 import ListPage from "../src/screens/ListPage"
 
 function App() {
-  const [user, setUser] = React.useState<null | firebase.User>(null)
+  const [user] = React.useState<null>(null)
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
 
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
-    })
-  })
 
   if (user) {
     return (

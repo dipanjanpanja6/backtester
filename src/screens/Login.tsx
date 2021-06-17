@@ -1,28 +1,30 @@
 import React from "react";
-import * as firebaseui from "firebaseui";
-import firebase from "firebase/app";
 import "firebase/auth";
 import "firebaseui/dist/firebaseui.css"
+import {Button,Grid, Paper, TextField} from "@material-ui/core";
 
 const Login: React.FC = () => {
-  React.useEffect(() => {
-
-    const authUI = new firebaseui.auth.AuthUI(firebase.apps[0].auth());
-    const uiConfig = ({
-      signInOptions: [
-        {
-          provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          disableSignUp: { status: true },
-          requireDisplayName: false,
-          signInMethod: firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD,
-        }
-      ]
-    });
-    authUI.start("#firebaseui-auth-container", uiConfig)
-  },[]);
 
   return (
-    <div id="firebaseui-auth-container" />
+      <Paper>
+        <Grid
+            container
+            spacing={3}
+            direction={'column'}
+            justify={'center'}
+            alignItems={'center'}
+        >
+          <Grid item xs={12}>
+            <TextField label="Username"></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="Password" type={'password'}></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth> Login </Button>
+          </Grid>
+        </Grid>
+      </Paper>
   );
 };
 
