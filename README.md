@@ -1,26 +1,39 @@
 ### Required
-Firebase account
+MongoDb Atlas Account
 
-### How to run
+### How to run - rough guide
 
 Install `npm i`
 
-Install Firebase tools `npm i -g firebase-tools`
+Generate env - `npm run setup`
 
-Initialise Firebase - `firebase init`
+Create free cluster in MongoDb Atlas
 
-Create app env - `npm run setup`
+Create Database and collection
 
-Copy Firebase config to .env
+Insert `data.json` into collection
 
-Run Firebase emulators - `cd functions && npm run emulators`
+Create Realm App and assign to MongoDb Atlas Cluster
+
+Enable Realm users if not enabled
+
+Generate Realm Schema
+
+Setup up Realm Rules to allow data access in app
+
+Save Realm changes
+
+Copy Realm Id > .env
+
+Copy GraphQL Url > .env
 
 Start app - `npm start`
+
+Run `npm run graphql:apollo-gen` to generate GraphQL typescript interfaces
 
 ### Before you commit
 
 Build locally to confirm no warnings - `npm run build`
 
 Commit using conventional commits - `npm run commit`
-
 

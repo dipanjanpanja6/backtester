@@ -6,9 +6,10 @@ import { Grid } from "@material-ui/core"
 import TabPanel from "../src/components/TabPanel"
 import Appbar from "../src/components/AppBar"
 import ListPage from "../src/screens/ListPage"
+import realm from "./services/realm";
 
 function App() {
-  const [user] = React.useState<null>(null)
+
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -16,7 +17,7 @@ function App() {
   }
 
 
-  if (user) {
+  if (realm.currentUser?.isLoggedIn) {
     return (
       <Grid container>
         <Appbar {...{ handleChange, value }} />

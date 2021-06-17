@@ -2,10 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const envFile = `
-REACT_APP_FIREBASE_CONFIG={}
-REACT_APP_FIREBASE_AUTH_EMULATOR_URL=http://localhost:9099
-REACT_APP_FIREBASE_STORAGE_HOST=localhost
-REACT_APP_FIREBASE_STORAGE_PORT=9199
+REACT_APP_REALM_APP_ID=
+REACT_APP_REALM_GRAPHQL_URL=
 `;
 
 fs.writeFileSync(path.join(process.cwd(),".env"),envFile);

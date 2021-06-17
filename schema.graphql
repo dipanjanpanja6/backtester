@@ -1,0 +1,185 @@
+type Combo {
+  _id: ObjectId
+  instrument: String
+  points: Float
+  strategies: [ComboStrategy]
+  trade_action: Int
+  user_id: String
+}
+
+type ComboStrategy {
+  indicator: String
+  operand: String
+  operator: String
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+type Query {
+  combo(query: ComboQueryInput): Combo
+  combos(query: ComboQueryInput, limit: Int = 100, sortBy: ComboSortByInput): [Combo]!
+}
+
+input ComboUpdateInput {
+  _id_unset: Boolean
+  strategies: [ComboStrategyUpdateInput]
+  points: Float
+  _id: ObjectId
+  instrument: String
+  trade_action: Int
+  trade_action_inc: Int
+  points_unset: Boolean
+  user_id_unset: Boolean
+  instrument_unset: Boolean
+  trade_action_unset: Boolean
+  strategies_unset: Boolean
+  points_inc: Float
+  user_id: String
+}
+
+input ComboQueryInput {
+  _id_gt: ObjectId
+  instrument_ne: String
+  instrument_lte: String
+  instrument_in: [String]
+  points: Float
+  instrument: String
+  instrument_gte: String
+  points_gte: Float
+  user_id_exists: Boolean
+  instrument_nin: [String]
+  _id_nin: [ObjectId]
+  OR: [ComboQueryInput!]
+  _id_lt: ObjectId
+  strategies: [ComboStrategyQueryInput]
+  strategies_exists: Boolean
+  _id_exists: Boolean
+  trade_action: Int
+  points_ne: Float
+  points_in: [Float]
+  _id_ne: ObjectId
+  _id_lte: ObjectId
+  _id_gte: ObjectId
+  AND: [ComboQueryInput!]
+  user_id_lt: String
+  trade_action_ne: Int
+  trade_action_gte: Int
+  user_id_gte: String
+  strategies_nin: [ComboStrategyQueryInput]
+  trade_action_in: [Int]
+  _id_in: [ObjectId]
+  trade_action_gt: Int
+  user_id_nin: [String]
+  points_gt: Float
+  _id: ObjectId
+  trade_action_nin: [Int]
+  user_id_in: [String]
+  user_id_ne: String
+  strategies_in: [ComboStrategyQueryInput]
+  instrument_lt: String
+  instrument_exists: Boolean
+  points_exists: Boolean
+  user_id_gt: String
+  trade_action_lte: Int
+  points_nin: [Float]
+  trade_action_lt: Int
+  user_id_lte: String
+  points_lt: Float
+  points_lte: Float
+  trade_action_exists: Boolean
+  instrument_gt: String
+  user_id: String
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+enum ComboSortByInput {
+  _ID_DESC
+  INSTRUMENT_ASC
+  INSTRUMENT_DESC
+  USER_ID_DESC
+  USER_ID_ASC
+  _ID_ASC
+  POINTS_ASC
+  POINTS_DESC
+  TRADE_ACTION_ASC
+  TRADE_ACTION_DESC
+}
+
+type Mutation {
+  deleteManyCombos(query: ComboQueryInput): DeleteManyPayload
+  deleteOneCombo(query: ComboQueryInput!): Combo
+  insertManyCombos(data: [ComboInsertInput!]!): InsertManyPayload
+  insertOneCombo(data: ComboInsertInput!): Combo
+  replaceOneCombo(data: ComboInsertInput!, query: ComboQueryInput): Combo
+  updateManyCombos(query: ComboQueryInput, set: ComboUpdateInput!): UpdateManyPayload
+  updateOneCombo(set: ComboUpdateInput!, query: ComboQueryInput): Combo
+  upsertOneCombo(data: ComboInsertInput!, query: ComboQueryInput): Combo
+}
+
+input ComboStrategyUpdateInput {
+  operand_unset: Boolean
+  operator: String
+  operator_unset: Boolean
+  indicator: String
+  indicator_unset: Boolean
+  operand: String
+}
+
+input ComboStrategyInsertInput {
+  indicator: String
+  operand: String
+  operator: String
+}
+
+input ComboStrategyQueryInput {
+  indicator_nin: [String]
+  operand_gte: String
+  operand_exists: Boolean
+  operator_nin: [String]
+  AND: [ComboStrategyQueryInput!]
+  OR: [ComboStrategyQueryInput!]
+  operand_in: [String]
+  indicator_gte: String
+  operator: String
+  operator_ne: String
+  indicator: String
+  indicator_exists: Boolean
+  indicator_ne: String
+  operator_gte: String
+  operand_gt: String
+  operand_ne: String
+  operator_in: [String]
+  operand: String
+  operand_lt: String
+  operand_lte: String
+  operator_exists: Boolean
+  operand_nin: [String]
+  indicator_lte: String
+  operator_lt: String
+  operator_gt: String
+  indicator_lt: String
+  indicator_gt: String
+  indicator_in: [String]
+  operator_lte: String
+}
+
+input ComboInsertInput {
+  _id: ObjectId
+  instrument: String
+  points: Float
+  strategies: [ComboStrategyInsertInput]
+  trade_action: Int
+  user_id: String
+}
+
+scalar ObjectId
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
