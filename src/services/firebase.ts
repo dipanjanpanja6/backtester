@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
 
 if (process.env.NODE_ENV === "development") {
     firebase.auth().useEmulator(process.env.REACT_APP_FIREBASE_AUTH_EMULATOR_URL as string)
+    firebase.functions().useFunctionsEmulator("http://localhost:5001")
 }
 
 export default firebase.apps[0]
