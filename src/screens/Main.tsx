@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react"
+import React, { useCallback, useEffect } from "react"
 import { Group2, Group2Value } from "../components/Group2"
 import { Grid } from "@material-ui/core"
 import { Group1 } from "../components/Group1"
@@ -8,7 +8,6 @@ import firebase from "firebase"
 const storageRef = firebase.storage().ref()
 
 const Main: React.FC = () => {
-  const timer = useRef<NodeJS.Timeout>()
   const [calling, setCalling] = React.useState<boolean>(true)
   const [group1Value, setGroup1Value] = React.useState<number>(1)
   const [group2Values, setGroup2Values] = React.useState<Group2Value[]>([])
@@ -47,12 +46,12 @@ const Main: React.FC = () => {
   }, [calling, uploadFCF])
 
   useEffect(() => {
-    timer.current = setInterval(function () {
+    const interval = setInterval(function () {
       setCalling(true)
     }, 600000)
 
     return () => {
-      timer.current = undefined
+      clearInterval(interval)
     }
   }, [])
 
