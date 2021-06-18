@@ -1,7 +1,7 @@
 import React from "react"
 import AppBar from "@material-ui/core/AppBar"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
+import { Folder, Home, List } from "@material-ui/icons"
+import { BottomNavigation, BottomNavigationAction, Box } from "@material-ui/core"
 
 interface AppbarProps {
   children?: React.ReactNode
@@ -13,19 +13,14 @@ export default function Appbar(props: AppbarProps) {
   const { value, handleChange } = props
 
   return (
-    <AppBar position="static">
-      <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-        <Tab label="Main Page" {...a11yProps(0)} />
-        <Tab label="List Page" {...a11yProps(1)} />
-        <Tab label="Blank Page" {...a11yProps(2)} />
-      </Tabs>
-    </AppBar>
+    <Box position="fixed" top="auto" bottom={0} left={0} right={0}>
+      <AppBar position="relative">
+        <BottomNavigation showLabels value={value} onChange={handleChange}>
+          <BottomNavigationAction label="Main Page" value="Main" icon={<Home />} />
+          <BottomNavigationAction label="List Page" value="List" icon={<List />} />
+          <BottomNavigationAction label="Blank Page" value="Blank" icon={<Folder />} />
+        </BottomNavigation>
+      </AppBar>
+    </Box>
   )
-}
-
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  }
 }
