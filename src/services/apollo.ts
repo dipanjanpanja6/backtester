@@ -1,6 +1,18 @@
 import realm from "./realm";
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import {ApolloClient, HttpLink, InMemoryCache, makeVar} from "@apollo/client";
+import gql from "graphql-tag";
 const graphqlUri = process.env.REACT_APP_REALM_GRAPHQL_URL as string;
+
+interface ComboStrategy {
+    indicator: String
+    operand: String
+    operator: String
+}
+
+export const strategiesVar = makeVar<string>("");
+export const instrumentsVar = makeVar<string[]>([]);
+export const comboStrategyVar = makeVar<ComboStrategy[]>([{indicator:"",operand:"",operator:""}]);
+
 
 // Gets a valid Realm user access token to authenticate requests
 async function getValidAccessToken() {
@@ -17,19 +29,41 @@ async function getValidAccessToken() {
     }
     return accessToken
 }
+export const typeDefs = gql`
+    extend type Query {
+        strategies: Int!
+    }
+`;
 
 const client = new ApolloClient({
+    typeDefs,
     link: new HttpLink({
         uri: graphqlUri,
         fetch: async (uri, options) => {
             const accessToken = await getValidAccessToken();
-            console.log(options,accessToken);
             (options!.headers as any)["Authorization"] = `Bearer ${accessToken}`;
             return fetch(uri, options);
         },
     }),
 
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        typePolicies: {
+            Query: {
+                fields: {
+                    strategies: {
+                        read(){
+                            return strategiesVar()
+                        }
+                    },
+                    comboStrategies: {
+                        read(){
+                            return comboStrategyVar()
+                        }
+                    }
+                }
+            }
+        }
+    }),
 });
 
 export default client
