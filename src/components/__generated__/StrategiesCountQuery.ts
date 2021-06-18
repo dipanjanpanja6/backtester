@@ -4,9 +4,9 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: StrategiesSelectQuery
+// GraphQL query operation: StrategiesCountQuery
 // ====================================================
 
-export interface StrategiesSelectQuery {
-  strategies: number;
+export interface StrategiesCountQuery {
+  strategyCount: number;
 }

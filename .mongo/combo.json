@@ -1,7 +1,4 @@
 {
-  "_id": {
-    "$oid": "60cb578d66bf1f6f57d863a4"
-  },
   "user_id": "gere",
   "history": [],
   "points": 11,

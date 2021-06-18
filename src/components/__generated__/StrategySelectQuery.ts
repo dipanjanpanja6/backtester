@@ -26,5 +26,5 @@ export interface StrategySelectQuery_frontend {
 
 export interface StrategySelectQuery {
   frontend: StrategySelectQuery_frontend | null;
-  strategies: number;
+  strategyCount: number;
 }

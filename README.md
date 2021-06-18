@@ -5,13 +5,13 @@ MongoDb Atlas Account
 
 Install `npm i`
 
-Generate env - `npm run setup`
+Generate .env - `npm run setup`
 
 Create free cluster in MongoDb Atlas
 
-Create Database and collection
+Create Database
 
-Insert `data.json` into collection
+Create collection with data from `.mongo`
 
 Create Realm App and assign to MongoDb Atlas Cluster
 

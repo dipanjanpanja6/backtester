@@ -9,9 +9,9 @@ interface ComboStrategy {
     operator: String
 }
 
-export const strategiesVar = makeVar<string>("");
+export const strategyCount = makeVar<string>("");
 export const instrumentsVar = makeVar<string[]>([]);
-export const comboStrategyVar = makeVar<ComboStrategy[]>([{indicator:"",operand:"",operator:""}]);
+export const comboStrategiesVar = makeVar<ComboStrategy[]>([{indicator:"",operand:"",operator:""}]);
 
 
 // Gets a valid Realm user access token to authenticate requests
@@ -31,7 +31,8 @@ async function getValidAccessToken() {
 }
 export const typeDefs = gql`
     extend type Query {
-        strategies: Int!
+        strategyCount: Int!
+        comboStrategies: [ComboStrategy]!
     }
 `;
 
@@ -50,14 +51,14 @@ const client = new ApolloClient({
         typePolicies: {
             Query: {
                 fields: {
-                    strategies: {
+                    strategyCount: {
                         read(){
-                            return strategiesVar()
+                            return strategyCount()
                         }
                     },
                     comboStrategies: {
                         read(){
-                            return comboStrategyVar()
+                            return comboStrategiesVar()
                         }
                     }
                 }
