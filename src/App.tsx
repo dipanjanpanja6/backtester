@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import "./App.css"
 import { Login } from "./screens/Login"
 import { Grid, AppBar, Toolbar, Typography } from "@material-ui/core"
 import SwipeableViews from "react-swipeable-views"
@@ -9,6 +8,7 @@ import ListPage from "../src/screens/ListPage"
 import realm from "./services/realm"
 import ComboForm from "./screens/ComboForm"
 import { useSnackbar } from "notistack"
+import "./App.css"
 
 function App() {
   const [value, setValue] = useState(0)
