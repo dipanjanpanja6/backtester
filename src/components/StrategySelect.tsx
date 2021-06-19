@@ -5,8 +5,7 @@ import { FormControl, FormLabel, TextField, Box } from "@material-ui/core"
 import { comboStrategiesVar } from "../services/apollo"
 import { Autocomplete } from "@material-ui/lab"
 import { StrategySelectQuery, StrategySelectQuery_frontend } from "./__generated__/StrategySelectQuery"
-import Loader from "../components/Loader"
-import ErrorPopup from "./ErrorPopup"
+import { Alert } from "@material-ui/lab"
 
 function StrategySelectGroups({ index, data }: { index: number; data?: StrategySelectQuery_frontend }) {
   const [indicator, setIndicator] = useState<string>("")
@@ -79,11 +78,11 @@ export default function StrategySelect() {
   `)
 
   if (loading) {
-    return <Loader />
+    return <Alert severity="info">loading</Alert>
   }
 
   if (error) {
-    return <ErrorPopup>StrategySelect error</ErrorPopup>
+    return <Alert severity="error">StrategySelect error</Alert>
   }
 
   const strategyCount = data?.strategyCount

@@ -1,6 +1,9 @@
 import React from "react"
 import AppBar from "@material-ui/core/AppBar"
-import { Folder, Home, List } from "@material-ui/icons"
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFolder, faHome, faList } from "@fortawesome/free-solid-svg-icons"
+
 import { BottomNavigation, BottomNavigationAction, Box } from "@material-ui/core"
 
 interface AppbarProps {
@@ -14,13 +17,12 @@ export default function Appbar(props: AppbarProps) {
 
   return (
     <>
-      <BottomNavigation />
       <Box position="fixed" top="auto" bottom={0} left={0} right={0}>
         <AppBar position="relative">
           <BottomNavigation showLabels value={value} onChange={handleChange}>
-            <BottomNavigationAction label="Main Page" value={0} icon={<Home />} />
-            <BottomNavigationAction label="List Page" value={1} icon={<List />} />
-            <BottomNavigationAction label="Blank Page" value={2} icon={<Folder />} />
+            <BottomNavigationAction label="Main Page" value={0} icon={<FontAwesomeIcon icon={faHome} />} />
+            <BottomNavigationAction label="List Page" value={1} icon={<FontAwesomeIcon icon={faList} />} />
+            <BottomNavigationAction label="Blank Page" value={2} icon={<FontAwesomeIcon icon={faFolder} />} />
           </BottomNavigation>
         </AppBar>
       </Box>

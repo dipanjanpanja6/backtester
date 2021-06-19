@@ -9,25 +9,28 @@ interface ErrorPopupProps {
 
 function ErrorPopup(props: ErrorPopupProps) {
   const { children } = props
-  const [open, setOpen] = React.useState<boolean>(true)
+  const [open, setOpen] = React.useState<boolean>(false)
 
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const handleClose = () => setOpen(false)
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" disableEscapeKeyDown disableBackdropClick>
-      <DialogTitle id="alert-dialog-title">{"Something went wrong!"}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">{children} </DialogContentText>
-      </DialogContent>
+    <div>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        open error popup
+      </Button>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" disableEscapeKeyDown disableBackdropClick>
+        <DialogTitle id="alert-dialog-title">{"Something went wrong!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">{children} </DialogContentText>
+        </DialogContent>
 
-      <DialogActions>
-        <Button onClick={handleClose} color="secondary" autoFocus>
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   )
 }
 

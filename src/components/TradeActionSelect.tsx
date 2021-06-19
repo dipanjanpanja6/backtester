@@ -2,8 +2,7 @@ import { useMutation, useQuery } from "@apollo/client"
 import { Button, FormControl, FormLabel, Box, Grid } from "@material-ui/core"
 import gql from "graphql-tag"
 import { TradeActionSelectQuery } from "./__generated__/TradeActionSelectQuery"
-import ErrorPopup from "../components/ErrorPopup"
-import Loader from "./Loader"
+import { Alert } from "@material-ui/lab"
 
 function TradeActionButton({ data }: { data: string | null }) {
   return (
@@ -44,11 +43,11 @@ export default function TradeActionSelect() {
   `)
 
   if (loading) {
-    return <Loader />
+    return <Alert severity="info">loading</Alert>
   }
 
   if (error) {
-    return <ErrorPopup>TradeActionSelect error</ErrorPopup>
+    return <Alert severity="error">StrategySelect error</Alert>
   }
 
   const isComboStrategiesEmpty = data?.comboStrategies.every(f => !f?.indicator && !f?.operator && !f?.operand)

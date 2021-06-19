@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { Button, ListItemAvatar, Avatar, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, ThemeProvider } from "@material-ui/core"
-import { Delete, FileCopy, Edit } from "@material-ui/icons"
+import { Button, ListItemAvatar, Avatar, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Paper } from "@material-ui/core"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash, faUser, faUserEdit } from "@fortawesome/free-solid-svg-icons"
 import { Alert } from "@material-ui/lab"
-import { ListPageTheme } from "../theme"
 
 function ListPage() {
   const [state] = useState<Array<Object> | null>([
@@ -13,15 +13,14 @@ function ListPage() {
   ])
 
   return (
-    //theme for specific page
-    <ThemeProvider theme={ListPageTheme}>
+    <Paper>
       <List>
         {state ? (
           state.map(({ url, key }: any, i) => (
             <ListItem key={i} button component="a" href={url} target="_blank">
               <ListItemAvatar>
                 <Avatar>
-                  <FileCopy />
+                  <FontAwesomeIcon icon={faUser} />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={key} secondary={url} />
@@ -29,14 +28,14 @@ function ListPage() {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  endIcon={<Delete />}
+                  endIcon={<FontAwesomeIcon icon={faTrash} />}
                   onClick={() => {
                     console.log(22)
                   }}>
                   Delete
                 </Button>
                 <IconButton>
-                  <Edit />
+                  <FontAwesomeIcon icon={faUserEdit} />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -47,7 +46,7 @@ function ListPage() {
           </Alert>
         )}
       </List>
-    </ThemeProvider>
+    </Paper>
   )
 }
 

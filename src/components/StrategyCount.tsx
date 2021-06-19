@@ -2,8 +2,7 @@ import { useQuery } from "@apollo/client"
 import { FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup } from "@material-ui/core"
 import { strategyCount } from "../services/apollo"
 import gql from "graphql-tag"
-import ErrorPopup from "../components/ErrorPopup"
-import Loader from "./Loader"
+ import { Alert } from "@material-ui/lab"
 
 // TODO - Rename to StrategyCount
 export default function StrategyCount() {
@@ -14,11 +13,11 @@ export default function StrategyCount() {
   `)
 
   if (loading) {
-    return <Loader />
+    return <Alert severity="info">loading</Alert>
   }
 
   if (error) {
-    return <ErrorPopup>StrategyCount error</ErrorPopup>
+    return <Alert severity="error">StrategySelect error</Alert>
   }
 
   return (

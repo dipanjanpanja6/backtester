@@ -1,4 +1,5 @@
-import { Grid, Box } from "@material-ui/core"
+import { Box } from "@material-ui/core"
+import { useTransition, animated as a } from "react-spring"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -10,9 +11,24 @@ interface TabPanelProps {
 export default function TabPanel(props: TabPanelProps) {
   const { children, value, index, path, ...other } = props
 
+  const transition = useTransition(value, {
+    from: { scale: 0, opacity: 0 },
+    enter: { scale: 1, opacity: 1 },
+    leave: { scale: 0, opacity: 0 },
+  })
+
   return (
-    <Grid container role="tabpanel" hidden={value !== index} id={path + "-" + index} aria-labelledby={path + "-" + index} {...other}>
-      {value === index && <Box width="100%">{children}</Box>}
-    </Grid>
+    <Box
+      bgcolor="aquamarine"
+      minHeight="calc(100vh - 64px)"
+      position="absolute"
+      width="100%"
+      role="tabpanel"
+      hidden={value !== index}
+      id={path + "-" + index}
+      aria-labelledby={path + "-" + index}
+      {...other}>
+      {transition((style, item) => item === index && <a.div style={style}>{children}</a.div>)}
+    </Box>
   )
 }

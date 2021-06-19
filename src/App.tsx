@@ -1,56 +1,53 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Login } from "./screens/Login"
-import { Grid, AppBar, Toolbar, Typography } from "@material-ui/core"
-import SwipeableViews from "react-swipeable-views"
+import { AppBar, Toolbar, Typography, Box, ThemeProvider } from "@material-ui/core"
 import TabPanel from "../src/components/TabPanel"
 import Appbar from "../src/components/AppBar"
 import ListPage from "../src/screens/ListPage"
 import realm from "./services/realm"
 import ComboForm from "./screens/ComboForm"
-import { useSnackbar } from "notistack"
+import { ListPageTheme, EmptyPageTheme } from "./theme"
+import Loader from "./components/Loader"
 import "./App.css"
 
 function App() {
   const [value, setValue] = useState(0)
-  //toast example
-  const { enqueueSnackbar } = useSnackbar()
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
 
-  useEffect(() => {
-    enqueueSnackbar("I love snacks.", { variant: "success" })
-  }, [enqueueSnackbar])
-
-  const handleChangeIndex = (index: number, indexLatest: number) => {
-    setValue(index)
-    console.log(index, indexLatest)
-  }
-
   if (realm.currentUser?.isLoggedIn) {
     return (
-      <Grid>
+      <Box>
         <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="h6">Title</Typography>
           </Toolbar>
         </AppBar>
 
-        <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
-          <TabPanel value={value} path={"Main"} index={0}>
+        <TabPanel value={value} path={"Main"} index={0}>
+          <Loader>
             <ComboForm />
-          </TabPanel>
-          <TabPanel value={value} path={"List"} index={1}>
+          </Loader>
+        </TabPanel>
+        <TabPanel value={value} path={"List"} index={1}>
+          <ThemeProvider
+            theme={outerTheme => ({
+              ...outerTheme,
+              ...ListPageTheme,
+              background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+              boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+            })}>
             <ListPage />
-          </TabPanel>
-          <TabPanel value={value} path={"Blank"} index={2}>
-            empty item
-          </TabPanel>
-        </SwipeableViews>
+          </ThemeProvider>
+        </TabPanel>
+        <TabPanel value={value} path={"Blank"} index={2}>
+          <ThemeProvider theme={upperTheme => ({ ...upperTheme, ...EmptyPageTheme })}>empty item</ThemeProvider>
+        </TabPanel>
 
         <Appbar {...{ handleChange, value }} />
-      </Grid>
+      </Box>
     )
   }
 
