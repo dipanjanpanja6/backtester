@@ -1,32 +1,54 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./App.css"
 import { Login } from "./screens/Login"
-import { Grid } from "@material-ui/core"
+import { Grid, AppBar, Toolbar, Typography } from "@material-ui/core"
+import SwipeableViews from "react-swipeable-views"
 import TabPanel from "../src/components/TabPanel"
 import Appbar from "../src/components/AppBar"
 import ListPage from "../src/screens/ListPage"
 import realm from "./services/realm"
 import ComboForm from "./screens/ComboForm"
+import { useSnackbar } from "notistack"
 
 function App() {
-  const [value, setValue] = React.useState("Main")
+  const [value, setValue] = useState(0)
+  //toast example
+  const { enqueueSnackbar } = useSnackbar()
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
+  }
+
+  useEffect(() => {
+    enqueueSnackbar("I love snacks.", { variant: "success" })
+  }, [enqueueSnackbar])
+
+  const handleChangeIndex = (index: number, indexLatest: number) => {
+    setValue(index)
+    console.log(index, indexLatest)
   }
 
   if (realm.currentUser?.isLoggedIn) {
     return (
-      <Grid container>
-        <TabPanel value={value} path={"Main"}>
-          <ComboForm />
-        </TabPanel>
-        <TabPanel value={value} path={"List"}>
-          <ListPage />
-        </TabPanel>
-        <TabPanel value={value} path={"Blank"}>
-          empty item
-        </TabPanel>
+      <Grid>
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <Typography variant="h6">Title</Typography>
+          </Toolbar>
+        </AppBar>
+
+        <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+          <TabPanel value={value} path={"Main"} index={0}>
+            <ComboForm />
+          </TabPanel>
+          <TabPanel value={value} path={"List"} index={1}>
+            <ListPage />
+          </TabPanel>
+          <TabPanel value={value} path={"Blank"} index={2}>
+            empty item
+          </TabPanel>
+        </SwipeableViews>
+
         <Appbar {...{ handleChange, value }} />
       </Grid>
     )

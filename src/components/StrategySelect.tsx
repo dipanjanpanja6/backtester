@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useQuery } from "@apollo/client"
 import gql from "graphql-tag"
-import { FormControl, FormLabel, TextField, CircularProgress, Box } from "@material-ui/core"
+import { FormControl, FormLabel, TextField, Box } from "@material-ui/core"
 import { comboStrategiesVar } from "../services/apollo"
-import { Alert, Autocomplete } from "@material-ui/lab"
+import { Autocomplete } from "@material-ui/lab"
 import { StrategySelectQuery, StrategySelectQuery_frontend } from "./__generated__/StrategySelectQuery"
+import Loader from "../components/Loader"
+import ErrorPopup from "./ErrorPopup"
 
 function StrategySelectGroups({ index, data }: { index: number; data?: StrategySelectQuery_frontend }) {
   const [indicator, setIndicator] = useState<string>("")
@@ -76,21 +78,13 @@ export default function StrategySelect() {
     }
   `)
 
-    if (loading) {
-      return (
-        <Alert severity="info" icon={<CircularProgress size={20} />}>
-          loading strategies
-        </Alert>
-      )
-    }
+  if (loading) {
+    return <Loader />
+  }
 
-    if (error) {
-      return (
-        <Alert severity="error" variant="outlined">
-          error
-        </Alert>
-      )
-    }
+  if (error) {
+    return <ErrorPopup>StrategySelect error</ErrorPopup>
+  }
 
   const strategyCount = data?.strategyCount
 

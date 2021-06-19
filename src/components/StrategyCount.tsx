@@ -1,9 +1,9 @@
-import React from "react"
 import { useQuery } from "@apollo/client"
-import { CircularProgress, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup } from "@material-ui/core"
+import { FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup } from "@material-ui/core"
 import { strategyCount } from "../services/apollo"
 import gql from "graphql-tag"
-import { Alert } from "@material-ui/lab"
+import ErrorPopup from "../components/ErrorPopup"
+import Loader from "./Loader"
 
 // TODO - Rename to StrategyCount
 export default function StrategyCount() {
@@ -14,19 +14,11 @@ export default function StrategyCount() {
   `)
 
   if (loading) {
-    return (
-      <Alert severity="info" icon={<CircularProgress size={20} />}>
-        loading
-      </Alert>
-    )
+    return <Loader />
   }
 
   if (error) {
-    return (
-      <Alert severity="error" variant="outlined">
-        error
-      </Alert>
-    )
+    return <ErrorPopup>StrategyCount error</ErrorPopup>
   }
 
   return (

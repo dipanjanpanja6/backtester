@@ -1,9 +1,9 @@
-import React from "react"
 import { useMutation, useQuery } from "@apollo/client"
-import { Button, FormControl, FormLabel, CircularProgress, Box, Grid } from "@material-ui/core"
+import { Button, FormControl, FormLabel, Box, Grid } from "@material-ui/core"
 import gql from "graphql-tag"
 import { TradeActionSelectQuery } from "./__generated__/TradeActionSelectQuery"
-import { Alert } from "@material-ui/lab"
+import ErrorPopup from "../components/ErrorPopup"
+import Loader from "./Loader"
 
 function TradeActionButton({ data }: { data: string | null }) {
   return (
@@ -44,19 +44,11 @@ export default function TradeActionSelect() {
   `)
 
   if (loading) {
-    return (
-      <Alert severity="info" icon={<CircularProgress size={20} />}>
-        loading trade actions
-      </Alert>
-    )
+    return <Loader />
   }
 
   if (error) {
-    return (
-      <Alert variant="outlined" severity="error">
-        error
-      </Alert>
-    )
+    return <ErrorPopup>TradeActionSelect error</ErrorPopup>
   }
 
   const isComboStrategiesEmpty = data?.comboStrategies.every(f => !f?.indicator && !f?.operator && !f?.operand)

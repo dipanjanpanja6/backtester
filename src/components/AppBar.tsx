@@ -13,14 +13,17 @@ export default function Appbar(props: AppbarProps) {
   const { value, handleChange } = props
 
   return (
-    <Box position="fixed" top="auto" bottom={0} left={0} right={0}>
-      <AppBar position="relative">
-        <BottomNavigation showLabels value={value} onChange={handleChange}>
-          <BottomNavigationAction label="Main Page" value="Main" icon={<Home />} />
-          <BottomNavigationAction label="List Page" value="List" icon={<List />} />
-          <BottomNavigationAction label="Blank Page" value="Blank" icon={<Folder />} />
-        </BottomNavigation>
-      </AppBar>
-    </Box>
+    <>
+      <BottomNavigation />
+      <Box position="fixed" top="auto" bottom={0} left={0} right={0}>
+        <AppBar position="relative">
+          <BottomNavigation showLabels value={value} onChange={handleChange}>
+            <BottomNavigationAction label="Main Page" value={0} icon={<Home />} />
+            <BottomNavigationAction label="List Page" value={1} icon={<List />} />
+            <BottomNavigationAction label="Blank Page" value={2} icon={<Folder />} />
+          </BottomNavigation>
+        </AppBar>
+      </Box>
+    </>
   )
 }

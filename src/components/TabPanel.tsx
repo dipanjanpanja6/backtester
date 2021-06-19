@@ -1,22 +1,18 @@
-import { Grid, Box, Typography } from "@material-ui/core"
+import { Grid, Box } from "@material-ui/core"
 
 interface TabPanelProps {
   children?: React.ReactNode
   path: string
   value: any
+  index: number
 }
 
 export default function TabPanel(props: TabPanelProps) {
-  const { children, value, path, ...other } = props
+  const { children, value, index, path, ...other } = props
 
   return (
-    <Grid container role="tabpanel" hidden={value !== path} id={`simple-tabpanel-${path}`} aria-labelledby={`simple-tab-${path}`} {...other}>
-      {value === path && (
-        <Box p={3} width="100%">
-          <Typography variant="h4">{path} Page</Typography>
-          {children}
-        </Box>
-      )}
+    <Grid container role="tabpanel" hidden={value !== index} id={path + "-" + index} aria-labelledby={path + "-" + index} {...other}>
+      {value === index && <Box width="100%">{children}</Box>}
     </Grid>
   )
 }
