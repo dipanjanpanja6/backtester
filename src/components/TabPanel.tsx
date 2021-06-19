@@ -12,9 +12,15 @@ export default function TabPanel(props: TabPanelProps) {
   const { children, value, index, path, ...other } = props
 
   const transition = useTransition(value, {
-    from: { scale: 0, opacity: 0 },
-    enter: { scale: 1, opacity: 1 },
-    leave: { scale: 0, opacity: 0 },
+    from: { x: -100, y: 800, opacity: 0 },
+    enter: { x: 0, y: 0, opacity: 1 },
+    leave: { x: 100, y: 800, opacity: 0 },
+    
+    //zoom style
+
+    // from: { scale: 0, opacity: 0 },
+    // enter: { scale: 1, opacity: 1 },
+    // leave: { scale: 0, opacity: 0 },
   })
 
   return (
