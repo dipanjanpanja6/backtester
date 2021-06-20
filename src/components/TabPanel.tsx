@@ -15,7 +15,7 @@ export default function TabPanel(props: TabPanelProps) {
     from: { x: -100, y: 800, opacity: 0 },
     enter: { x: 0, y: 0, opacity: 1 },
     leave: { x: 100, y: 800, opacity: 0 },
-    
+
     //zoom style
 
     // from: { scale: 0, opacity: 0 },
@@ -25,7 +25,7 @@ export default function TabPanel(props: TabPanelProps) {
 
   return (
     <Box
-      bgcolor="aquamarine"
+      bgcolor="#eefff5"
       minHeight="calc(100vh - 64px)"
       position="absolute"
       width="100%"

@@ -28,6 +28,7 @@ export default function ComboForm() {
         </Paper>
       </Box>
       <Animation />
+      <Box m={4} />
     </Grid>
   )
 }

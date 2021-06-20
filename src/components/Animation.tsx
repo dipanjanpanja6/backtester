@@ -1,7 +1,7 @@
-import { Grid, Box, Typography, Container } from "@material-ui/core"
+import { Grid, Box, Typography } from "@material-ui/core"
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCoffee, faBookMedical, faChevronDown } from "@fortawesome/free-solid-svg-icons"
+import { faCoffee, faBookMedical, faChevronDown, faTrash, faUser, faUserEdit, faOilCan, faAd, faAlignLeft, faAlignCenter } from "@fortawesome/free-solid-svg-icons"
 import { useSpring, animated } from "react-spring"
 
 function Animation() {
@@ -10,7 +10,7 @@ function Animation() {
 
   const expand = useSpring({
     config: { friction: 10 },
-    width: hover ? `100px` : "0px",
+    // width: hover ? `100px` : "0px",
     transform: hover ? "rotate(180deg)" : "rotate(0deg)",
   })
   const spin = useSpring({
@@ -21,34 +21,59 @@ function Animation() {
   return (
     <>
       <Grid container>
-        <Container>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Box mt={15} mb={15} width="100%">
-                <FontAwesomeIcon icon={faCoffee} spin />
-                <FontAwesomeIcon icon={faBookMedical} pulse />
-                <FontAwesomeIcon icon={faChevronDown} spin />
-              </Box>
-              <Box mt={15} mb={15} width="100%">
-                <animated.div style={expand}>
-                  <Typography variant="h4">Hello </Typography>
-                </animated.div>
-              </Box>
-              <TextAnimation />
-            </Grid>
-            <Grid item container xs={12} sm={6}>
-              <Box m="auto">
-                <animated.button onClick={() => toggle(!open)} style={spin}>
-                  <FontAwesomeIcon icon={faChevronDown} />
-                  <Typography>OnClick animation</Typography>
-                </animated.button>
-                <button onMouseEnter={() => toggleHover(!hover)} onMouseLeave={() => toggleHover(!hover)}>
-                  OnHover Animation
-                </button>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+        <Typography variant="h5" gutterBottom>
+          svg animations
+        </Typography>
+        <Box mt={2} mb={2} width="100%" display="flex">
+          <Box m={2}>
+            <FontAwesomeIcon icon={faTrash} size="2x" spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faUser} size="2x" pulse />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faUserEdit} size="2x" pulse />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faOilCan} size="2x" spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faAd} size="2x" spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faAlignLeft} size="2x" spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faAlignCenter} size="2x" spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faCoffee} spin />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faBookMedical} pulse />
+          </Box>
+          <Box m={2}>
+            <FontAwesomeIcon icon={faChevronDown} spin />
+          </Box>
+        </Box>
+        <Box width="100%">
+          <Typography variant="h5" gutterBottom>
+            on hover animation
+          </Typography>
+        </Box>
+        <Box mt={2} mb={2} onMouseEnter={() => toggleHover(!hover)} onMouseLeave={() => toggleHover(!hover)}>
+          <animated.div style={expand}>
+            <Typography variant="h4"> hover on me </Typography>
+          </animated.div>
+        </Box>
+        <TextAnimation />
+
+        <Box>
+          <animated.button onClick={() => toggle(!open)} style={spin}>
+            <FontAwesomeIcon icon={faChevronDown} />
+            <Typography>OnClick animation</Typography>
+          </animated.button>
+        </Box>
       </Grid>
     </>
   )
@@ -63,9 +88,9 @@ function TextAnimation() {
     to: { rotateX: 360 },
   })
   return (
-    <Box mt={15} mb={15} width="100%">
+    <Box width="100%">
       <animated.p style={freq}>
-        <Typography variant="h2">auto Moving text</Typography>
+        <Typography variant="h4">auto Moving text</Typography>
       </animated.p>
     </Box>
   )

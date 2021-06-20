@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core"
 import orange from "@material-ui/core/colors/orange"
 import green from "@material-ui/core/colors/green"
-import skyBlue from "@material-ui/core/colors/cyan"
+import purple from "@material-ui/core/colors/purple"
 import red from "@material-ui/core/colors/red"
 import brown from "@material-ui/core/colors/brown"
 import indigo from "@material-ui/core/colors/indigo"
@@ -12,26 +12,26 @@ const theme = createMuiTheme({
       ...green,
     },
     secondary: {
-      ...orange,
+      ...indigo,
     },
   },
   typography: {
-    fontFamily: "'Dancing Script', cursive",
+    fontFamily: "'Poppins', sans-serif",
   },
 })
 
 const ListPageTheme = createMuiTheme({
   palette: {
     primary: {
-      ...red,
+      ...orange,
     },
     secondary: {
-      ...skyBlue,
+      ...red,
     },
-    background: { default: "#ffbdbd", paper: "#eee" },
+    background: { default: "#fdf7ee", paper: "#fff0db" },
   },
   typography: {
-    fontFamily: "'Dancing Script', cursive",
+    fontFamily: "'Poppins', sans-serif",
   },
 })
 const EmptyPageTheme = createMuiTheme({
@@ -40,12 +40,12 @@ const EmptyPageTheme = createMuiTheme({
       ...brown,
     },
     secondary: {
-      ...indigo,
+      ...purple,
     },
     background: { default: "#ff0", paper: "#0cc" },
   },
   typography: {
-    fontFamily: "'Dancing Script', cursive",
+    fontFamily: "'Poppins', sans-serif",
   },
 })
 
